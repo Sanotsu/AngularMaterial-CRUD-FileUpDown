@@ -1,0 +1,66 @@
+<span>Linear:</span>
+<mat-radio-group [(ngModel)]="isLinear">
+  <mat-radio-button value="true">開啟</mat-radio-button>
+  <mat-radio-button value="false">關閉</mat-radio-button>
+</mat-radio-group>
+<br/>
+
+<mat-horizontal-stepper dis [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstForm">
+    <form [formGroup]="firstForm">
+      <ng-template matStepLabel>名稱</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="請輸入員工名稱" formControlName="name" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>下一步</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondForm">
+    <form [formGroup]="secondForm">
+      <ng-template matStepLabel>員工信息</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="請輸入員工年齡" formControlName="age" required>
+      </mat-form-field>
+      <br/>
+      <mat-form-field>
+        <mat-select placeholder="請選擇員工性別" formControlName="sex">
+          <mat-option value="F">女</mat-option>
+          <mat-option value="M">男</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br/>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="請設定員工入職日期" formControlName="empDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>上一步</button>
+        <button mat-button matStepperNext>下一步</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdForm">
+    <form [formGroup]="thirdForm">
+      <ng-template matStepLabel>郵箱</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="請輸入郵箱" formControlName="mail" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>上一步</button>
+        <button mat-button matStepperNext>下一步</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>完成</ng-template>
+    是否確定新增？
+    <div>
+      <button mat-button matStepperPrevious>上一步</button>
+      <!-- <button mat-button (click)="stepper.reset()">重置</button> -->
+      <button mat-button (click)="insertData()">完成</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

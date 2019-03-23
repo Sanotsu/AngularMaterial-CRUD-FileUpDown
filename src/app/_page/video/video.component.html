@@ -1,0 +1,22 @@
+<mdb-carousel [isControls]="true" class="carousel slide carousel-fade" [animation]="'fade'">
+  <mdb-carousel-item>
+    <video class="video-fluid" autoplay loop>
+      <source [src]="url + '/assets/video/Tropical.mp4'" type="video/mp4" />
+    </video>
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <video class="video-fluid" autoplay loop>
+      <source [src]="url + '/assets/video/forest.mp4'" type="video/mp4" />
+    </video>
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <video class="video-fluid" autoplay loop>
+      <source [src]="url + '/assets/video/Lines.mp4'" type="video/mp4" />
+    </video>
+  </mdb-carousel-item>
+</mdb-carousel>
+
+<div class="embed-responsive embed-responsive-16by9">
+  <video class="embed-responsive-item" controls="controls" [src]="url + '/assets/video/Lines.mp4'"
+    allowfullscreen></video>
+</div>

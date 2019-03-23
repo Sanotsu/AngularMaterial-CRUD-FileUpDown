@@ -1,0 +1,22 @@
+.container {
+    height: 600px;
+    background-position: cover;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+  }
+  .login-card {
+    width:500px;
+    height: 350px;
+    position: absolute;
+    top: 30%;
+    left: 49%;
+    transform: translateX(-50%);  
+  }
+  .title {
+    text-align: center;
+  }
+  .btn-center {
+    display: flex;
+    justify-content: center;
+  }

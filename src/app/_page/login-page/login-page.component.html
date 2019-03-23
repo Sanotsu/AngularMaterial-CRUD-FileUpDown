@@ -1,0 +1,40 @@
+<div class="container">
+  <mat-card fxFlex class="login-card">
+    <mat-card-title class="title">登入</mat-card-title>
+    <form [formGroup]="form" (ngSubmit)="login()" class="title" >
+      <mat-card-content>
+          <mat-icon>person</mat-icon>
+        <mat-form-field >
+          <input matInput placeholder="請輸入帳號" autocomplete="off" formControlName="username" required>
+        </mat-form-field>
+        <br/>
+        <mat-icon>verified_user</mat-icon>
+        <mat-form-field >
+          <input matInput type="password" placeholder="請輸入密碼" formControlName="password" required>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions class="btn-center">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">登入</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
+
+<div mdbModal #basicDialog="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title w-100" id="myModalLabel">登入失敗</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="basicDialog.hide()">
+                  <span aria-hidden="true">×</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              用戶名或密碼錯！
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="basicDialog.hide()" mdbWavesEffect>關閉</button>
+          </div>
+      </div>
+  </div>
+</div>

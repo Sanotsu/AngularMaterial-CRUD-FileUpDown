@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>{{data.title}} <button mat-icon-button class="close" (click)="onNoClick()">
+  <mat-icon>clear</mat-icon>
+</button></h1>
+
+<div mat-dialog-content>
+  <p>{{data.message}}</p>
+</div>
+<div mat-dialog-actions class="footer">
+  <button mat-button (click)="onNoClick()">關閉</button>
+</div>

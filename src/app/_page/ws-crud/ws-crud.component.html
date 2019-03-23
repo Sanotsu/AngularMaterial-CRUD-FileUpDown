@@ -1,0 +1,171 @@
+<h3>多條查詢</h3>
+
+<div>
+  <form [formGroup]="form" (ngSubmit)="wsQueryEmployee(1)">
+    <mat-form-field>
+      <input matInput placeholder="請輸入員工名稱" autocomplete="off" formControlName="name">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">查詢</button>
+  </form>
+</div>
+<mat-divider></mat-divider>
+<table *ngIf='tableVisible' mat-table [dataSource]="dataSource" class="table table-sm table-hover">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> 名稱 </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="age">
+    <th mat-header-cell *matHeaderCellDef> 年齡 </th>
+    <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<br /><br /><br />
+<h3>單條查詢與修改/刪除</h3>
+
+<div>
+  <form [formGroup]="upform" (ngSubmit)="wsQueryEmployee(2)">
+    <mat-form-field>
+      <input matInput placeholder="請輸入員工名稱" autocomplete="off" formControlName="name" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!upform.valid">查詢</button>
+  </form>
+</div>
+<mat-divider></mat-divider>
+<form [formGroup]="resForm" (ngSubmit)="wsUpdateEmployee()">
+  <span>名稱:</span>
+  <mat-form-field>
+    <input matInput autocomplete="off" formControlName="employeeName" required>
+  </mat-form-field>
+  <br />
+  <label>年齡:</label>
+  <mat-slider thumbLabel step="1" min="1" max="200" formControlName="employeeAgeSlider" class="example-margin">
+  </mat-slider>
+  <br />
+  <label>郵件:</label>
+  <mat-form-field>
+    <input matInput autocomplete="off" formControlName="employeeMail" required>
+  </mat-form-field>
+  <br />
+  <button mat-raised-button color="primary" type="submit" [disabled]="!resForm.valid">更新</button>
+</form>
+<button mat-raised-button color="primary" [disabled]="!resForm.valid" (click)="wsDeleteEmployee()">刪除</button>
+
+<br /><br /><br />
+<h3>新增數據</h3>
+<mat-divider></mat-divider>
+<form [formGroup]="insForm" (ngSubmit)="wsInsertEmployee()">
+  <span>名稱:</span>
+  <mat-form-field>
+    <input matInput autocomplete="off" formControlName="employeeName" required>
+  </mat-form-field>
+  <br />
+  <label>年齡:</label>
+  <mat-form-field>
+    <input matInput autocomplete="off" formControlName="employeeAge" required>
+  </mat-form-field>
+  <br />
+  <label>性別:</label>
+  <mat-form-field>
+    <mat-select placeholder="請選擇員工性別" formControlName="sex">
+      <mat-option value="F">女</mat-option>
+      <mat-option value="M">男</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br />
+  <label>郵件:</label>
+  <mat-form-field>
+    <input matInput autocomplete="off" formControlName="employeeMail" required>
+  </mat-form-field>
+  <br />
+  <label>入職日期:</label>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="請設定員工入職日期" formControlName="empDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <br />
+  <button mat-raised-button color="primary" type="submit" [disabled]="!insForm.valid">新增</button>
+</form>
+
+<br /><br /><br />
+<h3>call procedure test</h3>
+
+<div>
+  <form [formGroup]="spform" (ngSubmit)="wsQueryEmployeeBySp()">
+    <mat-form-field>
+      <input matInput placeholder="請輸入員工性別" autocomplete="off" formControlName="empsex">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="請輸入員工最小年齡" autocomplete="off" formControlName="empage">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">查詢</button>
+  </form>
+</div>
+<mat-divider></mat-divider>
+<table *ngIf='wsSptableVisible' mat-table [dataSource]="wsSpDataSource" class="table table-sm table-hover">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> 名稱 </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="age">
+    <th mat-header-cell *matHeaderCellDef> 年齡 </th>
+    <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<br /><br /><br />
+<h3>文件上傳</h3>
+
+<br />
+<input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
+<button mat-raised-button color="primary" matTooltip="選擇要上傳的文件" (click)='file.click()'>選擇文件</button>
+<button mat-raised-button color="primary" matTooltip="上傳選定的文件" (click)="upload()">上傳</button>
+<br />
+<mat-form-field class="example-chip-list">
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let file of files" [selectable]="selectable" [removable]="removable" (removed)="clear(file)">
+      {{file.name}}
+      <mat-icon matChipRemove *ngIf="removable">clear</mat-icon>
+    </mat-chip>
+    <input [matChipInputFor]="chipList" [matChipInputAddOnBlur]="addOnBlur">
+  </mat-chip-list>
+</mat-form-field>
+
+<mat-nav-list>
+  <mat-list-item *ngFor="let file of files">
+    <a matLine>{{ file.name }}</a>
+    <mat-icon (click)="clear(file)">clear</mat-icon>
+  </mat-list-item>
+</mat-nav-list>
+
+
+<br /><br /><br />
+<h3>文件下載</h3>
+
+<button mat-raised-button color="primary" (click)="queryFile()">查詢</button>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="fsdataSource" class="table table-sm table-hover">
+    <ng-container matColumnDef="filename">
+      <th mat-header-cell *matHeaderCellDef> 名稱 </th>
+      <td mat-cell *matCellDef="let element" (click)="download(element.filename)"> {{element.filename}} </td>
+    </ng-container>
+    <ng-container matColumnDef="length">
+      <th mat-header-cell *matHeaderCellDef> 檔案長度 </th>
+      <td mat-cell *matCellDef="let element"> {{element.length}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="fsDisplayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: fsDisplayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

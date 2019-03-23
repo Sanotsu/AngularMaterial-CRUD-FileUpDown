@@ -1,0 +1,16 @@
+<div>
+  <form [formGroup]="form" (ngSubmit)="queryEmployee()">
+    <mat-form-field>
+      <input matInput placeholder="請輸入員工名稱" autocomplete="off" formControlName="name" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">查詢</button>
+  </form>
+</div>
+<mat-divider></mat-divider>
+<form [formGroup]="resForm">
+  <span>名稱:</span>
+  <mat-form-field><input matInput autocomplete="off" formControlName="employeeName"></mat-form-field>
+  <br/>
+  <label>年齡:</label>
+  <mat-form-field><input matInput autocomplete="off" formControlName="employeeAge"></mat-form-field>
+</form>

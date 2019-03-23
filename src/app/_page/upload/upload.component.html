@@ -1,0 +1,24 @@
+<br/>
+<input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
+<button mat-raised-button color="primary"  matTooltip="選擇要上傳的文件" (click)='file.click()'>選擇文件</button>
+<button mat-raised-button color="primary" matTooltip="上傳選定的文件" (click)="upload()">上傳</button>
+<br/>
+<mat-form-field class="example-chip-list">
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let file of files" [selectable]="selectable"
+             [removable]="removable" (removed)="clear(file)">
+      {{file.name}}
+      <mat-icon matChipRemove *ngIf="removable">clear</mat-icon>
+    </mat-chip>
+    <input [matChipInputFor]="chipList"
+           [matChipInputAddOnBlur]="addOnBlur">
+  </mat-chip-list>
+</mat-form-field>
+
+<mat-nav-list>
+    <mat-list-item *ngFor="let file of files">
+        <a matLine>{{ file.name }}</a>
+        <mat-icon *ngIf="!progress" (click)="clear(file)" >clear</mat-icon>
+        <mat-progress-bar *ngIf="progress" mode="determinate" [value]="progress[file.name].progress | async"></mat-progress-bar>
+    </mat-list-item>
+</mat-nav-list>

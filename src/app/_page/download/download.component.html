@@ -1,0 +1,18 @@
+<br/>
+
+<button mat-raised-button color="primary" (click)="queryFile()">查詢</button>
+<div class="mat-elevation-z8" >
+  <table mat-table [dataSource]="dataSource" class="table table-sm table-hover">
+    <ng-container matColumnDef="filename" >
+      <th mat-header-cell *matHeaderCellDef> 名稱 </th>
+      <td mat-cell *matCellDef="let element" (click)="download(element.filename)"> {{element.filename}} </td>
+    </ng-container>
+    <ng-container matColumnDef="length">
+      <th mat-header-cell *matHeaderCellDef> 檔案長度 </th>
+      <td mat-cell *matCellDef="let element"> {{element.length}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

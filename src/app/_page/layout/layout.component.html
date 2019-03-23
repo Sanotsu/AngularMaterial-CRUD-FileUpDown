@@ -1,0 +1,48 @@
+<mat-toolbar color="primary" class="header">
+  <button mat-icon-button (click)="sideNav.toggle()">
+    <mat-icon>{{ sideNav.opened ? 'close' : 'menu' }}</mat-icon>
+  </button>
+  <span>Angular Material Demo</span>
+  <span class="toolbar-seprator"></span>
+
+  <button mat-button [matMenuTriggerFor]="menu" matBadge="V" matBadgePosition="after" matBadgeColor="accent">
+    <mat-icon>account_circle</mat-icon>{{username}} </button>
+  <button mat-button (click)='logout()'>
+    <mat-icon>exit_to_app</mat-icon>登出</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)='logout()'>
+      <mat-icon>exit_to_app</mat-icon>
+      <span>登出</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sideNav mode="side" fixedTopGap="20" fixedBottomGap="20" class="sidenav">
+    <mat-nav-list (click)="sideNav.close()">
+      <mat-divider></mat-divider>
+      <a [routerLink]="['/', 'material', 'Gallary']" mat-list-item>圖片</a>
+      <mat-divider></mat-divider>
+      <a [routerLink]="['/', 'material', 'Video']" mat-list-item>視頻</a>
+      <mat-divider></mat-divider>
+      <a [routerLink]="['/', 'material', 'SingleQuery']" mat-list-item>單筆查詢</a>
+      <mat-divider></mat-divider>
+      <a [routerLink]="['/', 'material', 'MultipleQuery']" mat-list-item>多筆查詢</a>
+      <mat-divider></mat-divider>
+      <a [routerLink]="['/', 'material', 'InsertData']" mat-list-item>新增</a>
+      <mat-divider></mat-divider>
+      <a [routerLink]="['/', 'material', 'UpdateData']" mat-list-item>修改</a>
+      <mat-divider></mat-divider>
+      <a [routerLink]="['/', 'material', 'DeleteData']" mat-list-item>刪除</a>
+      <mat-divider></mat-divider>
+      <a [routerLink]="['/', 'material', 'Upload']" mat-list-item>上傳</a>
+      <mat-divider></mat-divider>
+      <a [routerLink]="['/', 'material', 'Download']" mat-list-item>下載</a>
+      <mat-divider></mat-divider>
+      <a [routerLink]="['/', 'material', 'WSCRUD']" mat-list-item>ws增刪改查</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="sidenav-content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
